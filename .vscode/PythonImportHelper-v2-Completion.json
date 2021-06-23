@@ -1,0 +1,108 @@
+[
+    {
+        "label": "config",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "config",
+        "description": "config",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "telebot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "telebot",
+        "description": "telebot",
+        "detail": "telebot",
+        "documentation": {}
+    },
+    {
+        "label": "types",
+        "importPath": "telebot",
+        "description": "telebot",
+        "isExtraImport": true,
+        "detail": "telebot",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "emoji",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "emoji",
+        "description": "emoji",
+        "detail": "emoji",
+        "documentation": {}
+    },
+    {
+        "label": "send_welcome",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def send_welcome(message):\n    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)\n    itembtn1 = types.KeyboardButton('Узнать погоду на сегодня')\n    markup.add(itembtn1)\n    msg = bot.send_message(message.chat.id,\n                    \"Привет\" +(emoji.emojize(':raised_hand:')) +  message.from_user.first_name  + \"\\n Я бот пока только умею показывать\"+(emoji.emojize(':cloud:'))+\"погоду в городе Калининграде\"+(emoji.emojize(':house_with_garden:')) +\" \", reply_markup=markup)\n    bot.register_next_step_handler(msg,SendWeather)\n#Вывод данных\n@bot.message_handler(func=lambda message: True , content_types=[\"text\", \"sticker\", \"pinned_message\", \"photo\", \"audio\"])\ndef SendWeather(message):",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "SendWeather",
+        "kind": 2,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "def SendWeather(message):\n    bot.reply_to(message,emoji.emojize(':calendar:Сегодня {0} {1} {2} \\n' '\\n'\n    ':sun_with_face: Температура в течении дня {3} {4} \\n' '\\n' ':cloud: Ошущается как {5} \\n''\\n'':sunrise_over_mountains: {6} \\n''\\n'':cloud:{7}').format(day,data,month, temp_min,temp_max,feels_like ,sunrise ,text ))\nbot.polling()",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "r",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "r = requests.get(\"https://sinoptik.ua/погода-калининград\")\nhtml = BS(r.content, 'html.parser')\nbot = telebot.TeleBot(config.token)\n# Парсинг информации с сайта \nfor el in html.select('#content'):\n    data = el.select('.date ')[0].text\n    day = el.select('.day-link ')[0].text\n    month= el.select('.month ')[0].text\n    temp_min = el.select('.temperature .min ')[0].text\n    temp_max = el.select('.temperature .max ')[0].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "html",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "html = BS(r.content, 'html.parser')\nbot = telebot.TeleBot(config.token)\n# Парсинг информации с сайта \nfor el in html.select('#content'):\n    data = el.select('.date ')[0].text\n    day = el.select('.day-link ')[0].text\n    month= el.select('.month ')[0].text\n    temp_min = el.select('.temperature .min ')[0].text\n    temp_max = el.select('.temperature .max ')[0].text\n    text =el.select('.wDescription .description')[0].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 5,
+        "importPath": "bot",
+        "description": "bot",
+        "peekOfCode": "bot = telebot.TeleBot(config.token)\n# Парсинг информации с сайта \nfor el in html.select('#content'):\n    data = el.select('.date ')[0].text\n    day = el.select('.day-link ')[0].text\n    month= el.select('.month ')[0].text\n    temp_min = el.select('.temperature .min ')[0].text\n    temp_max = el.select('.temperature .max ')[0].text\n    text =el.select('.wDescription .description')[0].text\n    feels_like =el.select('.temperatureSens .p5')[0].text",
+        "detail": "bot",
+        "documentation": {}
+    },
+    {
+        "label": "token",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "token = '1842893271:AAHo7voZuDKbqXnv9kF6XZWOWyh_rjEo-Tc'",
+        "detail": "config",
+        "documentation": {}
+    }
+]
